@@ -1,12 +1,12 @@
 package com.anka.inheritance.asset;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import lombok.Data;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "PERSON")
+@Data
 public class Person {
 
     @Id
@@ -16,19 +16,4 @@ public class Person {
     @Column(name = "name")
     private String name;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }

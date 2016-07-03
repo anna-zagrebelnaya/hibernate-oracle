@@ -1,10 +1,13 @@
 package com.anka.inheritance.asset;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "ASSET")
 @Inheritance(strategy=InheritanceType.JOINED)
+@Data
 public class Asset {
 
     @Id
@@ -14,20 +17,4 @@ public class Asset {
     @ManyToOne
     @JoinColumn(name = "PERSON_ID")
     private Person person;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
-    }
 }

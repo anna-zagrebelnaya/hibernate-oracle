@@ -115,7 +115,7 @@ public class GetSumOfPersonPositiveContacts
                 .add(Restrictions.eq("person.id", personId))
                 .setProjection(Projections.projectionList()
                         .add(Projections.sqlGroupProjection(
-                                "sum(this_1_.FRIENDS) + sum(this_2_.LIKES) as total",
+                                "sum(this_1_.FRIENDS) + sum(this_2_.LIKES) as total", //this_1, this_2 - tables of subclasses, there is no possibility to push their aliases into projection
                                 "{alias}.PERSON_ID",
                                 new String[]{"total"},
                                 new Type[]{IntegerType.INSTANCE}
