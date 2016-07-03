@@ -7,33 +7,62 @@ import com.anka.inheritance.asset.TWAsset;
 import com.anka.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.criterion.*;
+import org.hibernate.type.IntegerType;
+import org.hibernate.type.Type;
 
 import java.util.Locale;
 
-public class InheritanceTest
+public class GetSumOfPersonPositiveContacts
 {
     private static Session session;
 
-    private static int PERSON_ANONYMOUS_ID = 10;
-    private static int PERSON_ANKA_ID = 11;
+    static int PERSON_ANONYMOUS_ID = 10;
+    static int PERSON_ANKA_ID = 11;
 
     public static void main( String[] args )
     {
         System.out.println("Maven + Hibernate + Oracle");
-        Locale.setDefault(Locale.ENGLISH); //need to avoid ORA-00604: error occurred at recursive SQL level 1
-        session = HibernateUtil.getSessionFactory().openSession();
-
-        session.beginTransaction();
-
         setUp();
 
+        beginTransaction();
+        Object total = calculateTotalPersonFriendsAndLikes(PERSON_ANONYMOUS_ID);
+        System.out.println(total);
+        commitTransaction();
+
+        beginTransaction();
+        Object total2 = calculateTotalPersonFriendsAndLikes(PERSON_ANKA_ID);
+        System.out.println(total2);
+        commitTransaction();
+    }
+
+    public static void setUp() {
+        Locale.setDefault(Locale.ENGLISH); //need to avoid ORA-00604: error occurred at recursive SQL level 1
+        openSession();
+        beginTransaction();
+        setUpInitialData();
+        commitTransaction();
+    }
+
+    private static void openSession() {
+        session = HibernateUtil.getSessionFactory().openSession();
+    }
+
+    static void beginTransaction() {
+        session.beginTransaction();
+    }
+
+    static void commitTransaction() {
         session.getTransaction().commit();
     }
 
-    private static void setUp() {
+    private static void setUpInitialData() {
         Person person = getOrCreatePerson(PERSON_ANONYMOUS_ID, "Anonymous");
         createFBAsset(100, person, 5);
         createTwitterAsset(200, person, 6);
+
+        Person person2 = getOrCreatePerson(PERSON_ANKA_ID, "Anka");
+        createFBAsset(102, person2, 3);
+        createTwitterAsset(202, person2, 4);
     }
 
     //db calls
@@ -54,7 +83,7 @@ public class InheritanceTest
             FBAsset fbAsset = new FBAsset();
             fbAsset.setId(id);
             fbAsset.setPerson(person);
-            fbAsset.setFriendsOrLikes(friends);
+            fbAsset.setFriends(friends);
             session.save(fbAsset);
         }
     }
@@ -64,7 +93,7 @@ public class InheritanceTest
             TWAsset twAsset = new TWAsset();
             twAsset.setId(id);
             twAsset.setPerson(person);
-            twAsset.setFriendsOrLikes(likes);
+            twAsset.setLikes(likes);
             session.save(twAsset);
         }
     }
@@ -78,6 +107,19 @@ public class InheritanceTest
     private static Asset getAssetById(int id) {
         return (Asset) session.createCriteria(Asset.class)
                 .add(Restrictions.eq("id", id))
+                .uniqueResult();
+    }
+
+    static Object calculateTotalPersonFriendsAndLikes(int personId) {
+        return session.createCriteria(Asset.class)
+                .add(Restrictions.eq("person.id", personId))
+                .setProjection(Projections.projectionList()
+                        .add(Projections.sqlGroupProjection(
+                                "sum(this_1_.FRIENDS) + sum(this_2_.LIKES) as total",
+                                "{alias}.PERSON_ID",
+                                new String[]{"total"},
+                                new Type[]{IntegerType.INSTANCE}
+                        )))
                 .uniqueResult();
     }
 }

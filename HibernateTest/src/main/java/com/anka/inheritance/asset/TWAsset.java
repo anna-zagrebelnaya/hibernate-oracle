@@ -11,13 +11,13 @@ import javax.persistence.Table;
 public class TWAsset extends Asset{
 
     @Column(name = "LIKES", precision = 10)
-    private int friendsOrLikes;
+    private int likes;
 
-    public int getFriendsOrLikes() {
-        return friendsOrLikes;
+    public int getLikes() {
+        return likes;
     }
 
-    public void setFriendsOrLikes(int friendsOrLikes) {
-        this.friendsOrLikes = friendsOrLikes;
+    public void setLikes(int likes) {
+        this.likes = likes;
     }
 }

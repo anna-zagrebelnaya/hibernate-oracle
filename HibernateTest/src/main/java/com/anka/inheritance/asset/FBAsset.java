@@ -8,13 +8,13 @@ import javax.persistence.*;
 public class FBAsset extends Asset {
 
     @Column(name = "FRIENDS", precision = 10)
-    private int friendsOrLikes;
+    private int friends;
 
-    public int getFriendsOrLikes() {
-        return friendsOrLikes;
+    public int getFriends() {
+        return friends;
     }
 
-    public void setFriendsOrLikes(int friendsOrLikes) {
-        this.friendsOrLikes = friendsOrLikes;
+    public void setFriends(int friends) {
+        this.friends = friends;
     }
 }
