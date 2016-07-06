@@ -2,7 +2,7 @@ package com.anka.inheritance;
 
 import com.anka.inheritance.asset.Asset;
 import com.anka.inheritance.asset.FBAsset;
-import com.anka.inheritance.asset.Person;
+import com.anka.inheritance.person.Person;
 import com.anka.inheritance.asset.TWAsset;
 import com.anka.util.HibernateUtil;
 import org.hibernate.Session;

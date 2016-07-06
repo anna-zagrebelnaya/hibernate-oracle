@@ -1,5 +1,6 @@
 package com.anka.inheritance.asset;
 
+import com.anka.inheritance.person.Person;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -11,10 +12,10 @@ import javax.persistence.*;
 public class Asset {
 
     @Id
-    @Column(name = "ID", unique = true, nullable = false, precision = 19, scale = 0)
+    @Column(name = "id", unique = true, nullable = false, precision = 10)
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "PERSON_ID")
+    @JoinColumn(name = "person_id", nullable = false)
     private Person person;
 }

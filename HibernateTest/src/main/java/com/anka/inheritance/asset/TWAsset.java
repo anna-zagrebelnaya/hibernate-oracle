@@ -1,6 +1,7 @@
 package com.anka.inheritance.asset;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,9 +12,10 @@ import javax.persistence.Table;
 @Table(name = "TWITTER_ASSET")
 @PrimaryKeyJoinColumn(name="ID")
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class TWAsset extends Asset{
 
-    @Column(name = "LIKES", precision = 10)
+    @Column(name = "likes", nullable = false, precision = 10)
     private int likes;
 
 }

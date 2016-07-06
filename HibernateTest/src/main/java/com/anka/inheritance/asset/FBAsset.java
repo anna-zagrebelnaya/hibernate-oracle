@@ -1,6 +1,7 @@
 package com.anka.inheritance.asset;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 
@@ -8,9 +9,10 @@ import javax.persistence.*;
 @Table(name = "FB_ASSET")
 @PrimaryKeyJoinColumn(name="ID")
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class FBAsset extends Asset {
 
-    @Column(name = "FRIENDS", precision = 10)
+    @Column(name = "friends", nullable = false, precision = 10)
     private int friends;
 
 }
