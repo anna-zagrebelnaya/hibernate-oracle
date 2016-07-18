@@ -1,0 +1,125 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="Anko (generated)" id="1468876070713-1" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="ASSET">
+            <column name="ID" type="NUMBER(10, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PERSON_ID" type="NUMBER(10, 0)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Anko (generated)" id="1468876070713-2" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="FB_ASSET">
+            <column name="ID" type="NUMBER(10, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FRIENDS" type="NUMBER(10, 0)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Anko (generated)" id="1468876070713-3" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="PERSON">
+            <column name="ID" type="NUMBER(10, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR2(255 BYTE)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Anko (generated)" id="1468876070713-4" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="PERSONS_IN_GROUPS">
+            <column name="PERSON_ID" type="NUMBER(10, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="GROUP_ID" type="NUMBER(10, 0)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Anko (generated)" id="1468876070713-5" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="PERSON_GROUP">
+            <column name="ID" type="NUMBER(10, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR2(255 BYTE)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Anko (generated)" id="1468876070713-6" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="TWITTER_ASSET">
+            <column name="ID" type="NUMBER(10, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LIKES" type="NUMBER(10, 0)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Anko (generated)" id="1468876070713-7" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="ASSET_PK" tableName="ASSET" unique="true">
+            <column name="ID"/>
+        </createIndex>
+        <addPrimaryKey columnNames="ID" constraintName="ASSET_PK" forIndexName="ASSET_PK" tableName="ASSET"/>
+    </changeSet>
+    <changeSet author="Anko (generated)" id="1468876070713-8" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="FB_ASSET_PK" tableName="FB_ASSET" unique="true">
+            <column name="ID"/>
+        </createIndex>
+        <addPrimaryKey columnNames="ID" constraintName="FB_ASSET_PK" forIndexName="FB_ASSET_PK" tableName="FB_ASSET"/>
+    </changeSet>
+    <changeSet author="Anko (generated)" id="1468876070713-9" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="PERSON_GROUP_PK" tableName="PERSONS_IN_GROUPS" unique="true">
+            <column name="PERSON_ID"/>
+            <column name="GROUP_ID"/>
+        </createIndex>
+        <addPrimaryKey columnNames="PERSON_ID, GROUP_ID" constraintName="PERSON_GROUP_PK" forIndexName="PERSON_GROUP_PK" tableName="PERSONS_IN_GROUPS"/>
+    </changeSet>
+    <changeSet author="Anko (generated)" id="1468876070713-10" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="PERSON_PK" tableName="PERSON" unique="true">
+            <column name="ID"/>
+        </createIndex>
+        <addPrimaryKey columnNames="ID" constraintName="PERSON_PK" forIndexName="PERSON_PK" tableName="PERSON"/>
+    </changeSet>
+    <changeSet author="Anko (generated)" id="1468876070713-11" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="SYS_C007131" tableName="PERSON_GROUP" unique="true">
+            <column name="ID"/>
+        </createIndex>
+        <addPrimaryKey columnNames="ID" constraintName="SYS_C007131" forIndexName="SYS_C007131" tableName="PERSON_GROUP"/>
+    </changeSet>
+    <changeSet author="Anko (generated)" id="1468876070713-12" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="TWITTER_ASSET_PK" tableName="TWITTER_ASSET" unique="true">
+            <column name="ID"/>
+        </createIndex>
+        <addPrimaryKey columnNames="ID" constraintName="TWITTER_ASSET_PK" forIndexName="TWITTER_ASSET_PK" tableName="TWITTER_ASSET"/>
+    </changeSet>
+    <changeSet author="Anko (generated)" id="1468876070713-13" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="PERSON_GROUP_NAME_UNIQUE" tableName="PERSON_GROUP" unique="true">
+            <column name="NAME"/>
+        </createIndex>
+        <addUniqueConstraint columnNames="NAME" constraintName="PERSON_GROUP_NAME_UNIQUE" forIndexName="PERSON_GROUP_NAME_UNIQUE" tableName="PERSON_GROUP"/>
+    </changeSet>
+    <changeSet author="Anko (generated)" id="1468876070713-14" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="PERSON_NAME_UNIQUE" tableName="PERSON" unique="true">
+            <column name="NAME"/>
+        </createIndex>
+        <addUniqueConstraint columnNames="NAME" constraintName="PERSON_NAME_UNIQUE" forIndexName="PERSON_NAME_UNIQUE" tableName="PERSON"/>
+    </changeSet>
+    <changeSet author="Anko (generated)" id="1468876070713-15" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addForeignKeyConstraint baseColumnNames="PERSON_ID" baseTableName="ASSET" constraintName="ASSET_PERSON_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="PERSON"/>
+    </changeSet>
+    <changeSet author="Anko (generated)" id="1468876070713-16" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addForeignKeyConstraint baseColumnNames="ID" baseTableName="FB_ASSET" constraintName="FB_ASSET_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="ASSET"/>
+    </changeSet>
+    <changeSet author="Anko (generated)" id="1468876070713-17" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addForeignKeyConstraint baseColumnNames="GROUP_ID" baseTableName="PERSONS_IN_GROUPS" constraintName="PERSON_GROUP_G" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="PERSON_GROUP"/>
+    </changeSet>
+    <changeSet author="Anko (generated)" id="1468876070713-18" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addForeignKeyConstraint baseColumnNames="PERSON_ID" baseTableName="PERSONS_IN_GROUPS" constraintName="PERSON_GROUP_P" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="PERSON"/>
+    </changeSet>
+    <changeSet author="Anko (generated)" id="1468876070713-19" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addForeignKeyConstraint baseColumnNames="ID" baseTableName="TWITTER_ASSET" constraintName="TWITTER_ASSET_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="ASSET"/>
+    </changeSet>
+</databaseChangeLog>

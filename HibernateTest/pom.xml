@@ -38,6 +38,12 @@
     </dependency>
 
     <dependency>
+      <groupId>org.liquibase</groupId>
+      <artifactId>liquibase-core</artifactId>
+      <version>3.5.1</version>
+    </dependency>
+
+    <dependency>
       <groupId>javassist</groupId>
       <artifactId>javassist</artifactId>
       <version>3.12.1.GA</version>
@@ -50,4 +56,20 @@
     </dependency>
 
   </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.liquibase</groupId>
+        <artifactId>liquibase-maven-plugin</artifactId>
+        <configuration>
+          <changeLogFile>
+            ${basedir}/src/main/liquibase/master.xml
+          </changeLogFile>
+          <propertyFile>src/main/resources/db.properties</propertyFile>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
 </project>
